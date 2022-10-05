@@ -28,6 +28,7 @@ public class UsuarioService {
     }
 
     public UsuarioModel cadastrarUsuario(UsuarioModel usuarioModel){
+        //O Encode vai sobrescrever a senha pela senha criptografada
         usuarioModel.setSenha(passwordEncoder().encode(usuarioModel.getSenha()));
         return usuarioRepository.save(usuarioModel);
     }
