@@ -26,9 +26,9 @@ public class UsuarioModel implements Serializable {
     @Column(nullable = false)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String telefone;
-    @Column(nullable = true, unique = true)
+    @Column(nullable = false, unique = true)
     private String login;
-    @Column(nullable = true)
+    @Column(nullable = false)
     private String senha;
 
 
