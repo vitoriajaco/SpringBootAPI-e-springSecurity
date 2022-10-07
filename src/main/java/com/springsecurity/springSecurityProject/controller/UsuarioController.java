@@ -31,9 +31,9 @@ public class UsuarioController {
         return ResponseEntity.ok(listaDeUsuarioResponse);
     }
     @PostMapping(value = "/usuarios")
-    public ResponseEntity<UsuarioResponse> cadastrar(@RequestBody UsuarioModel usuarioModel){
-        UsuarioModel usuario = usuarioService.cadastrarUsuario (usuarioModel);
-        UsuarioResponse usuarioResponse = UsuarioResponse.fromUsuarioModel(usuarioModel);
+    public ResponseEntity<UsuarioResponse> cadastrar(@RequestBody UsuarioRequest usuarioRequest){
+        UsuarioModel usuario = usuarioService.cadastrarUsuario (usuarioRequest.toUsuarioModel());
+        UsuarioResponse usuarioResponse = UsuarioResponse.fromUsuarioModel(usuario);
         return new ResponseEntity<>(usuarioResponse, HttpStatus.CREATED);
     }
 

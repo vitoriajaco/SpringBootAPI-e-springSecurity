@@ -18,6 +18,7 @@ public class UsuarioResponse {
     private Long id;
     private String nome;
     private String login;
+    @JsonProperty("password")
     private String senha;
 
     public static UsuarioResponse fromUsuarioModel(UsuarioModel usuarioModel){
