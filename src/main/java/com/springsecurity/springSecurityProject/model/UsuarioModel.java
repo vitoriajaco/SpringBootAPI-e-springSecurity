@@ -21,10 +21,8 @@ public class UsuarioModel implements Serializable {
     @Column(nullable = false)
     private String nome;
     @Column (nullable = false)
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String idade;
     @Column(nullable = false)
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String telefone;
     @Column(nullable = false, unique = true)
     private String login;

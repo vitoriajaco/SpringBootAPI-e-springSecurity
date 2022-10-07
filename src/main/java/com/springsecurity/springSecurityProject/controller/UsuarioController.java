@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -19,15 +20,21 @@ public class UsuarioController {
     UsuarioService usuarioService;
 
     @GetMapping(value = "/usuarios")
-    public ResponseEntity<List<UsuarioModel>> buscar() {
+    public ResponseEntity<List<UsuarioResponse>> buscar() {
+      List<UsuarioModel> listaDeUsuarioModel = usuarioService.mostrarTodosUsuarios();
+      List<UsuarioResponse> listaDeUsuarioResponse = new ArrayList<>();
+      for (UsuarioModel usuarioModel : listaDeUsuarioModel ) {
+            UsuarioResponse usuarioResponse = UsuarioResponse.fromUsuarioModel(usuarioModel);
+            listaDeUsuarioResponse.add(usuarioResponse);
+        }
 
-
-        return ResponseEntity.ok(usuarioService.mostrarTodosUsuarios());
+        return ResponseEntity.ok(listaDeUsuarioResponse);
     }
-    @PostMapping(value = "/usuarios/create")
-    public ResponseEntity<UsuarioModel> cadastrar(@RequestBody UsuarioModel usuarioModel){
+    @PostMapping(value = "/usuarios")
+    public ResponseEntity<UsuarioResponse> cadastrar(@RequestBody UsuarioModel usuarioModel){
         UsuarioModel usuario = usuarioService.cadastrarUsuario (usuarioModel);
-        return new ResponseEntity<>(usuario, HttpStatus.CREATED);
+        UsuarioResponse usuarioResponse = UsuarioResponse.fromUsuarioModel(usuarioModel);
+        return new ResponseEntity<>(usuarioResponse, HttpStatus.CREATED);
     }
 
 }
